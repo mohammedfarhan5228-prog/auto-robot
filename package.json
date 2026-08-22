@@ -1,0 +1,23 @@
+{
+  "name": "robotrack",
+  "version": "1.0.0",
+  "description": "RoboTrack - IoT-Based Smart Delivery Robot Tracking and Dispatch System (full software simulation)",
+  "main": "backend/server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node backend/server.js",
+    "simulate": "node simulator/simulator.js",
+    "test:e2e": "node scripts/e2e-test.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.0"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^10.1.2"
+  }
+}

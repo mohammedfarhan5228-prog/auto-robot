@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RoboTrack – Track Your Delivery</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">R</div>
+    <div>
+      <div class="brand-name">RoboTrack</div>
+      <div class="brand-sub">Smart Delivery Robot Dispatch</div>
+    </div>
+  </div>
+  <nav class="topnav">
+    <a href="/" class="active">Track Delivery</a>
+    <a href="/admin">Fleet Dashboard</a>
+  </nav>
+  <div class="conn" id="apiStatus"><span class="dot"></span>Connecting&hellip;</div>
+</header>
+
+<main class="layout">
+
+  <aside class="panel">
+
+    <!-- Step 1: delivery location -->
+    <section class="card" id="locSection">
+      <div class="card-head"><span class="step-num">1</span><h2>Delivery location</h2></div>
+      <p class="hint">Enter a serviceable Bengaluru PIN code to place your delivery point on the map.</p>
+      <form id="pinForm" class="row" autocomplete="off">
+        <input id="pinInput" list="pinList" inputmode="numeric" maxlength="6" placeholder="e.g. 560064" />
+        <datalist id="pinList"></datalist>
+        <button type="submit" class="btn" id="locateBtn">Locate</button>
+      </form>
+      <div class="chips" id="pinChips"></div>
+      <div class="loc-card hidden" id="locCard">
+        <div class="loc-area" id="locArea"></div>
+        <div class="loc-meta" id="locMeta"></div>
+      </div>
+      <p class="error hidden" id="pinError"></p>
+    </section>
+
+    <!-- Step 2: nearest robot -->
+    <section class="card disabled" id="robotCard">
+      <div class="card-head"><span class="step-num">2</span><h2>Nearest robot</h2></div>
+      <p class="hint">The system picks the closest robot that is Available, Online and above 30% battery.</p>
+      <button class="btn btn-block" id="findBtn" disabled>Find Nearest Robot</button>
+      <div id="selBox" class="hidden">
+        <div class="sel-top">
+          <span class="rid" id="selId"></span>
+          <span id="selStatus"></span>
+        </div>
+        <div class="kv-grid">
+          <div class="kv">
+            <label>Battery</label><b id="selBatt"></b>
+            <div class="bar"><i id="selBattBar"></i></div>
+          </div>
+          <div class="kv"><label>Distance</label><b id="selDist"></b></div>
+          <div class="kv"><label>ETA</label><b id="selEta"></b></div>
+        </div>
+        <div class="reason" id="selReason"></div>
+      </div>
+      <p class="error hidden" id="selError"></p>
+    </section>
+
+    <!-- Step 3: dispatch and live tracking -->
+    <section class="card disabled" id="dispatchCard">
+      <div class="card-head"><span class="step-num">3</span><h2>Dispatch &amp; track</h2></div>
+      <button class="btn btn-primary btn-block" id="dispatchBtn" disabled>Dispatch Robot</button>
+
+      <div id="mission" class="hidden" style="margin-top:16px">
+        <ol class="stepper" id="stepper">
+          <li data-step="Assigned"><span class="sdot"></span>Assigned</li>
+          <li data-step="En Route"><span class="sdot"></span>En Route</li>
+          <li data-step="Delivering"><span class="sdot"></span>Delivering</li>
+          <li data-step="Delivered"><span class="sdot"></span>Delivered</li>
+        </ol>
+        <div class="mission-head">
+          <span class="mono" id="mDeliveryId"></span>
+          <span id="mStatus"></span>
+        </div>
+        <div class="progress"><i id="progFill"></i></div>
+        <div class="prog-label" id="progLabel">0%</div>
+        <div class="stats">
+          <div><label>Battery</label><b id="mBatt">-</b></div>
+          <div><label>Speed</label><b id="mSpeed">-</b></div>
+          <div><label>Remaining</label><b id="mDist">-</b></div>
+          <div><label>ETA</label><b id="mEta">-</b></div>
+        </div>
+        <div class="alert hidden" id="obstacleAlert">Obstacle detected &mdash; robot paused until the path is clear.</div>
+        <div class="success hidden" id="successBox">
+          <b>Delivered successfully</b>
+          <span id="successDetail"></span>
+        </div>
+        <button class="btn btn-block hidden" id="newBtn">Start New Delivery</button>
+      </div>
+    </section>
+
+    <p class="disclaimer">
+      RoboTrack is a software simulation of an IoT delivery fleet &mdash; no physical robots, GPS or sensors are connected.
+    </p>
+  </aside>
+
+  <section class="map-wrap">
+    <div id="map"></div>
+    <div class="map-legend">
+      <span><i style="background:#2563eb"></i>Destination</span>
+      <span><i style="background:#16a34a"></i>Available</span>
+      <span><i style="background:#0891b2"></i>En Route</span>
+      <span><i style="background:#d97706"></i>Delivering</span>
+      <span><i style="background:#ca8a04"></i>Charging</span>
+      <span><i style="background:#667085"></i>Offline</span>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/common.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

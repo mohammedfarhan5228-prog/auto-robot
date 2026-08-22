@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RoboTrack – Fleet Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">R</div>
+    <div>
+      <div class="brand-name">RoboTrack</div>
+      <div class="brand-sub">Fleet Operations</div>
+    </div>
+  </div>
+  <nav class="topnav">
+    <a href="/">Track Delivery</a>
+    <a href="/admin" class="active">Fleet Dashboard</a>
+  </nav>
+  <div class="conn" id="apiStatus"><span class="dot"></span>Connecting&hellip;</div>
+</header>
+
+<main class="admin">
+
+  <section class="kpis">
+    <div class="kpi"><label>Fleet size</label><b id="kTotal">-</b> <small id="kOnline"></small></div>
+    <div class="kpi"><label>Available now</label><b id="kAvail">-</b></div>
+    <div class="kpi"><label>On delivery</label><b id="kBusy">-</b></div>
+    <div class="kpi"><label>Avg battery</label><b id="kBatt">-</b></div>
+  </section>
+
+  <section class="admin-grid">
+    <div class="map-wrap">
+      <div id="map"></div>
+      <div class="map-legend">
+        <span><i style="background:#16a34a"></i>Available</span>
+        <span><i style="background:#2563eb"></i>Assigned</span>
+        <span><i style="background:#0891b2"></i>En Route</span>
+        <span><i style="background:#d97706"></i>Delivering</span>
+        <span><i style="background:#ca8a04"></i>Charging</span>
+        <span><i style="background:#dc2626"></i>Obstacle</span>
+        <span><i style="background:#667085"></i>Offline</span>
+      </div>
+    </div>
+
+    <aside class="fleet-col">
+      <div class="card">
+        <div class="card-head"><h2>Fleet status</h2></div>
+        <p class="hint" id="activeLine">No active delivery.</p>
+        <div class="fleet-list" id="fleetList"></div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="card table-card">
+    <div class="card-head"><h2>Recent deliveries</h2></div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Delivery</th><th>PIN</th><th>Destination</th><th>Robot</th>
+          <th>Status</th><th>Progress</th><th>ETA</th><th>Created</th>
+        </tr>
+      </thead>
+      <tbody id="delBody">
+        <tr><td colspan="8" class="empty">Loading&hellip;</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/common.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
