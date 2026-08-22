@@ -23,8 +23,8 @@ Two views:
 
 | Page | URL | Audience |
 |---|---|---|
-| Customer tracking | `http://localhost:3000` | enter PIN, dispatch, watch live delivery |
-| Fleet dashboard | `http://localhost:3000/admin` | all robots on map, KPIs, status cards, recent deliveries |
+| Customer tracking | `https://auto-robot-pcm9.onrender.com` | enter PIN, dispatch, watch live delivery |
+| Fleet dashboard | `https://auto-robot-pcm9.onrender.com/admin` | all robots on map, KPIs, status cards, recent deliveries |
 
 ## 2. Tech stack (all free)
 
